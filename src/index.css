@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@theme {
+  --color-porcelain: #f9faf8;
+  --color-spearmint: #b8d8ba;
+  --color-citrus: #ffeaa7;
+  --color-slate: #6d7275;
+  --color-text-dark: #1c1c1c;
+
+  --font-heading: "Playfair Display", serif;
+  --font-body: "Inter", sans-serif;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+h1 {
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
