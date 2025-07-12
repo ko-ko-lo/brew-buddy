@@ -1,30 +1,26 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
+import ControlButton from "./components/ControlButton";
+import PresetSelector from "./components/PresetSelector";
+import TimeInput from "./components/TimeInput";
+import TimerDisplay from "./components/TimerDisplay";
 import "./index.css";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <h1 className="bg-citrus p-6 rounded text-center text-5xl">
-        Tailwind is working!
-      </h1>
-      <div className="bg-porcelain text-text-dark font-body">
-        All custom styles work now ✅
+    <div className="max-w-[852px] mx-auto px-4">
+      <h1 className="text-center text-6xl mt-16 mb-10">Tea Timer</h1>
+      <div className="flex flex-col md:flex-row justify-between gap-4 items-center">
+        <div className="md:w-1/2">
+          <TimerDisplay />
+        </div>
+
+        <div className="md:w-1/2">
+          <TimeInput />
+          <ControlButton />
+        </div>
       </div>
 
-      <div>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
-    </>
+      <PresetSelector />
+    </div>
   );
 }
 

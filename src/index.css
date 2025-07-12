@@ -3,8 +3,10 @@
 @theme {
   --color-porcelain: #f9faf8;
   --color-spearmint: #b8d8ba;
+  --color-dark-spearmint: #7fab89;
   --color-citrus: #ffeaa7;
   --color-slate: #6d7275;
+  --color-light-slate: #6d727580;
   --color-text-dark: #1c1c1c;
 
   --font-heading: "Playfair Display", serif;
@@ -16,6 +18,8 @@ body {
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
+  color: var(--color-text-dark);
+  background-color: var(--color-porcelain);
 }
 
 h1 {
@@ -23,4 +27,17 @@ h1 {
   font-optical-sizing: auto;
   font-weight: 600;
   font-style: normal;
+  color: var(--color-text-dark);
+}
+
+/* Hide arrows (Input fields) in Chrome, Safari, Edge */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Hide arrows in Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }
