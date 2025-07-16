@@ -7,15 +7,22 @@ const selection = [
 
 type PresetSelectorProbs = {
   setTime: (value: number) => void;
+  setIsRunning: (value: boolean) => void;
 };
 
-export default function PresetSelector({ setTime }: PresetSelectorProbs) {
+export default function PresetSelector({
+  setTime,
+  setIsRunning,
+}: PresetSelectorProbs) {
   return (
     <div className="mt-18 flex flex-wrap gap-x-4">
       {selection.map(({ label, time, timeDisplayed }) => (
         <button
           key={label}
-          onClick={() => setTime(time)}
+          onClick={() => {
+            setTime(time);
+            setIsRunning(false);
+          }}
           className="w-[calc(50%-8px)] md:w-[calc(25%-12px)] px-2 mb-4 bg-slate text-porcelain rounded-lg py-5 text-center text-2xl font-light hover:bg-text-dark transition-colors duration-200 cursor-pointer"
         >
           <span className="font-medium block">{timeDisplayed}</span>

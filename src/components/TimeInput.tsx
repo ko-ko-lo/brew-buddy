@@ -8,9 +8,14 @@ const timeUnits = [
 type TimeInputProps = {
   time: number;
   setTime: (value: number) => void;
+  setIsRunning: (value: boolean) => void;
 };
 
-export default function TimeInput({ time, setTime }: TimeInputProps) {
+export default function TimeInput({
+  time,
+  setTime,
+  setIsRunning,
+}: TimeInputProps) {
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
 
@@ -49,7 +54,10 @@ export default function TimeInput({ time, setTime }: TimeInputProps) {
               id={id}
               min={0}
               max={id === "seconds" ? 59 : 99}
-              onChange={(e) => handleChange(e, id)}
+              onChange={(e) => {
+                handleChange(e, id);
+                setIsRunning(false);
+              }}
               className="rounded-lg border-[2px] border-light-slate text-[32px] p-2 text-center max-h-[77px] focus:outline-none focus:ring-2 focus:ring-light-slate"
             />
           </div>

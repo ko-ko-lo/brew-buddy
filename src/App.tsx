@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ControlButton from "./components/ControlButton";
 import PresetSelector from "./components/PresetSelector";
 import TimeInput from "./components/TimeInput";
@@ -7,6 +7,21 @@ import "./index.css";
 
 function App() {
   const [time, setTime] = useState(120);
+  const [isRunning, setIsRunning] = useState(false);
+
+  useEffect(() => {
+    if (!isRunning) return;
+
+    if (time === 0) {
+      setIsRunning(false);
+      return;
+    }
+    const interval = setInterval(() => {
+      setTime((prevTime) => prevTime - 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [isRunning, time]);
 
   return (
     <div className="max-w-[852px] mx-auto px-4">
@@ -17,12 +32,16 @@ function App() {
         </div>
 
         <div className="md:w-1/2">
-          <TimeInput setTime={setTime} time={time} />
-          <ControlButton />
+          <TimeInput
+            setTime={setTime}
+            time={time}
+            setIsRunning={setIsRunning}
+          />
+          <ControlButton isRunning={isRunning} setIsRunning={setIsRunning} />
         </div>
       </div>
 
-      <PresetSelector setTime={setTime} />
+      <PresetSelector setTime={setTime} setIsRunning={setIsRunning} />
     </div>
   );
 }
