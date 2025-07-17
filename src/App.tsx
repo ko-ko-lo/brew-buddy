@@ -28,7 +28,7 @@ function App() {
       <h1 className="text-center text-6xl mt-16 mb-10">Tea Timer</h1>
       <div className="flex flex-col md:flex-row justify-between gap-4 items-center">
         <div className="md:w-1/2">
-          <TimerDisplay time={time} />
+          <TimerDisplay time={time} isRunning={isRunning} />
         </div>
 
         <div className="md:w-1/2">

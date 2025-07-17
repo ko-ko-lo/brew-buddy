@@ -13,6 +13,24 @@
   --font-body: "Inter", sans-serif;
 }
 
+@keyframes pulseTick {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.985);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@layer utilities {
+  .animate-pulse-tick {
+    animation: pulseTick 0.5s ease-in-out;
+  }
+}
+
 body {
   font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
