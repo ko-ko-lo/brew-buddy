@@ -19,6 +19,11 @@ export default function TimeInput({
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
 
+  const [inputValues, setInputValues] = React.useState({
+    minutes: minutes.toString().padStart(2, "0"),
+    seconds: seconds.toString().padStart(2, "0"),
+  });
+
   // The function takes two parameters:
   // event trigger when an <input> changed &
   // a string that tells which field is being changed
@@ -51,11 +56,51 @@ export default function TimeInput({
             </label>
             <input
               type="number"
+              pattern="[0-9]*"
+              inputMode="numeric"
+              value={inputValues[id as "minutes" | "seconds"]}
+              onKeyDown={(e) => {
+                const allowedKeys = [
+                  "Backspace",
+                  "Tab",
+                  "ArrowLeft",
+                  "ArrowRight",
+                  "Delete",
+                ];
+
+                if (!/[0-9]/.test(e.key) && !allowedKeys.includes(e.key)) {
+                  e.preventDefault();
+                }
+              }}
               id={id}
               min={0}
               max={id === "seconds" ? 59 : 99}
               onChange={(e) => {
                 handleChange(e, id);
+                setIsRunning(false);
+
+                let value = e.target.value;
+
+                // Limit to 2 digits
+                if (value.length > 2) {
+                  value = value.slice(0, 2);
+                }
+
+                // Update input state
+                setInputValues((prev) => ({ ...prev, [id]: clampedValue }));
+
+                const numericValue = parseInt(value, 10) || 0;
+                const clampedValue = Math.min(
+                  numericValue,
+                  id === "seconds" ? 59 : 99
+                );
+
+                const updatedTime =
+                  id === "seconds"
+                    ? minutes * 60 + clampedValue
+                    : clampedValue * 60 + seconds;
+
+                setTime(updatedTime);
                 setIsRunning(false);
               }}
               className="rounded-lg border-[2px] border-light-slate text-[32px] p-2 text-center max-h-[77px] focus:outline-none focus:ring-2 focus:ring-light-slate"
